@@ -13,5 +13,14 @@
     </head>
     <body>
         <h1><b>HTML Forms</b></h1>
+        <form action="index.html">
+            Textbox <input type="text" name="txtText" value="" size="S"/><br/>
+            Password <input type="password" name="txtPassword" value=""/><br/>
+            Hidden <input type="hidden" name="txtHidden" value=""/><br/>
+
+
+
+
+        </form>
     </body>
 </html>
