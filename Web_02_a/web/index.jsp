@@ -12,6 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="MainController" method="gey">
+            a: <input type="text" name="txtA"/><br/>
+            b: <input type="text" name="txtB"/><br/>
+            <input type="submit" value="submit">
+
+
+        </form>
     </body>
 </html>
