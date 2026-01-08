@@ -39,10 +39,51 @@ public class MainController extends HttpServlet {
             out.println("<body>");
             String txtA = request.getParameter("txtA");
             String txtB = request.getParameter("txtB");
-            double a = Double.parseDouble(txtA);
-            double b = Double.parseDouble(txtB);
-            out.println(a + "+" + b + "= <b>" + (a + b) + "</b><br/>");
-          
+            String txtOp = request.getParameter("txtOp");
+            boolean checkError = false;
+            double result = 0;
+            double a = 0;
+            double b = 0;
+            try {
+                a = Double.parseDouble(txtA);
+                b = Double.parseDouble(txtB);
+                switch (txtOp) {
+                    case "+":
+                        result = a + b;
+                        break;
+                    case "-":
+                        result = a - b;
+                        break;
+                    case "*":
+                        result = a * b;
+                        break;
+                    case "/":
+                       if(b==0){
+                           checkError=true;
+                       }
+                       else {
+                            result = a / b;
+                       }
+                        
+                        break;
+                    default:
+                        result = 0;
+                }
+            } catch (Exception e) {
+                checkError = true;
+            }
+            if (!checkError) {
+                out.println(a + txtOp + b + "= <b>" + result + "</b>");
+              
+                
+
+            }
+            else{
+                out.print("Error");
+            }
+            out.println("</body>");
+            out.println("</html>");
+
         }
     }
 

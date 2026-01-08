@@ -15,6 +15,16 @@
         <form action="MainController" method="get">
             a: <input type="text" name="txtA"/><br/>
             b: <input type="text" name="txtB"/><br/>
+            <select name="txtOp">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+
+
+
+
+            </select>
             <input type="submit" value="submit">
 
 
