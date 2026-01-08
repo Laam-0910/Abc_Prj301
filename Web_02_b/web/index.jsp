@@ -20,14 +20,8 @@
                 <option value="-">-</option>
                 <option value="*">*</option>
                 <option value="/">/</option>
-
-
-
-
             </select>
             <input type="submit" value="submit">
-
-
         </form>
     </body>
 </html>
