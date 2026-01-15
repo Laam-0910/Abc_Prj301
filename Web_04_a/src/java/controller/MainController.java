@@ -16,7 +16,7 @@ import model.UserDTO;
 
 /**
  *
- * @author caonh
+ * @author tungi
  */
 public class MainController extends HttpServlet {
 
@@ -37,25 +37,28 @@ public class MainController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MainController</title>");
+            out.println("<title>Servlet MainController</title>");            
             out.println("</head>");
             out.println("<body>");
             String txtUsername = request.getParameter("txtUsername");
             String txtPassword = request.getParameter("txtPassword");
+            
             String url = "";
             UserDAO udao = new UserDAO();
             UserDTO user = udao.login(txtUsername, txtPassword);
-
-            if (user != null) {
-                url = "a.jsp";
+            System.out.println(user);
+            if(user!=null){
+                url ="a.jsp";
                 request.setAttribute("user", user);
-            } else {
-                url = "login.jsp";
-                request.setAttribute("message", "Invalid username or password");
+            }else{
+                url ="login.jsp";
+                request.setAttribute("message", "Invalid username or password!");
             }
+            
             // Chuyen trang
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
+            
             out.println("</body>");
             out.println("</html>");
         }

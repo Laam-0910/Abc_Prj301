@@ -13,23 +13,25 @@ import utils.DbUtils;
 
 /**
  *
- * @author caonh
+ * @author tungi
  */
 public class UserDAO {
 
     public ArrayList<UserDTO> list = new ArrayList<>();
 
     public UserDAO() {
-
     }
 
     public UserDTO searchById(String username) {
         try {
             Connection conn = DbUtils.getConnection();
-          String sql = "SELECT * FROM tblUsers "
-                    + " WHERE userID=? ";
-            PreparedStatement pst=conn.prepareStatement(sql);
+            String sql = "SELECT * FROM tblUsers "
+                    + " WHERE userID=?";
+            System.out.println(sql);
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, username);
             ResultSet rs = pst.executeQuery();
+            
             UserDTO user = null;
             while (rs.next()) {
                 String userID = rs.getString("userID");
@@ -39,16 +41,17 @@ public class UserDAO {
                 boolean status = rs.getBoolean("status");
                 user = new UserDTO(userID, fullName, password, roleID, status);
             }
+            
             System.out.println(user);
+            
             return user;
         } catch (Exception e) {
             return null;
         }
-
     }
 
-    public UserDTO login(String fullname, String password) {
-        UserDTO u = searchById(fullname);
+    public UserDTO login(String username, String password) {
+        UserDTO u = searchById(username);
         if (u != null && u.getPassword().equals(password)) {
             return u;
         }
