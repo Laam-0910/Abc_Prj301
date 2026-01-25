@@ -1,7 +1,7 @@
 <%-- 
-    Document   : a.jsp
-    Created on : 08-01-2026, 11:15:32
-    Author     : tungi
+    Document   : a
+    Created on : Jan 25, 2026, 2:05:36 PM
+    Author     : caonh
 --%>
 
 <%@page import="model.UserDTO"%>
@@ -19,16 +19,11 @@
         %>
         <h1>Welcome, <%=u.getFullName()%> </h1>
         <a href="search.jsp">Search</a>
-        <a href="MainController?action=logout&">Logout</a>
-        <h2>Bang dieu khien</h2>
-        Tinh nang 1 <br/>
-        Tinh nang 2 <br/>
-        Tinh nang 3 <br/>
-        <%  } else {
-                response.sendRedirect("login.jsp");
-            }
-        %>
-
-
+        <a href="MainController?action=logout">Logout</a><br/>
     </body>
+    <%
+        } else {
+            response.sendRedirect("login.jsp");
+        }
+    %>
 </html>
