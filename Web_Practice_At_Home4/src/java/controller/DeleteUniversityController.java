@@ -10,13 +10,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author tungi
+ * @author caonh
  */
-public class LogoutController extends HttpServlet {
+public class DeleteUniversityController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,15 +28,8 @@ public class LogoutController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        HttpSession session = request.getSession();
-        if (session.getAttribute("user") != null) {
-            // huy bo toan bo noi dung session
-            session.invalidate();
-        }
-        String url = "login.jsp";
-        response.sendRedirect(url);
+        request.setCharacterEncoding("UTF-8");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

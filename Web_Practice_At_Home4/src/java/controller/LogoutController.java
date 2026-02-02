@@ -6,6 +6,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author tungi
+ * @author caonh
  */
 public class LogoutController extends HttpServlet {
 
@@ -29,11 +30,10 @@ public class LogoutController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         if (session.getAttribute("user") != null) {
-            // huy bo toan bo noi dung session
             session.invalidate();
         }
         String url = "login.jsp";

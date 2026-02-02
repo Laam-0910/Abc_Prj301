@@ -6,17 +6,20 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import model.UniversityDAO;
+import model.UniversityDTO;
 
 /**
  *
- * @author tungi
+ * @author caonh
  */
-public class LogoutController extends HttpServlet {
+public class DeleteUniversityController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,15 +32,42 @@ public class LogoutController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        HttpSession session = request.getSession();
-        if (session.getAttribute("user") != null) {
-            // huy bo toan bo noi dung session
-            session.invalidate();
+        request.setCharacterEncoding("UTF-8");
+        String keywords = request.getParameter("keywords");
+        String id= request.getParameter("id");
+        if (keywords == null) {
+            keywords = "";
         }
-        String url = "login.jsp";
-        response.sendRedirect(url);
+        if(id==null){
+            id="";
+        }
+
+        System.out.println(keywords);
+        
+        UniversityDAO udao = new UniversityDAO();
+        
+        //DELETE
+        if(!id.isEmpty()){
+            boolean check=udao.softDelete(id);
+            if(check){
+                request.setAttribute("message","Deleted Successfully !!! ");
+            }else{
+                request.setAttribute("message","Deleted Failed !!!" + id );
+            }
+        }
+        
+        
+        //SEARCH
+        ArrayList<UniversityDTO> list = new ArrayList<>();
+        if (keywords.trim().length() > 0) {
+            list = udao.filterByName(keywords);
+        }
+        request.setAttribute("list", list);
+        request.setAttribute("keywords", keywords);
+        String url = "search.jsp";
+        RequestDispatcher rd = request.getRequestDispatcher(url);
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
