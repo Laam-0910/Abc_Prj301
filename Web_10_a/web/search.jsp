@@ -59,7 +59,7 @@
                 <td>${u.totalFaculties}</td>
                 <td>
                     <c:if test="${u.isDraft}">
-                        <input type="submit" value="Update"/>
+                       <a href="MainController?action=updateUniversity&id=${u.id}"/>Update</a>
                     </c:if>
                 </td>
                 <td>

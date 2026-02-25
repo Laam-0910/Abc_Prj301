@@ -11,13 +11,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.UserDAO;
-import model.UserDTO;
 
 /**
  *
- * @author tungi
+ * @author caonh
  */
 public class MainController extends HttpServlet {
 
@@ -32,29 +29,18 @@ public class MainController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        
-        String action = request.getParameter("action");
-        String url = "login";
-         
-        if(action.equals("login")){
-            url = "LoginController";
-        }else if(action.equals("logout")){
-            url = "LogoutController";
-        }else if(action.equals("search")){
-            url = "SearchController";
-        }else if(action.equals("deleteUniversity")){
-            url= "DeleteUniversityController";
-        }
-        else if(action.equals("addUniversity")){
-            url= "AddUniversityController";
-        }
-        
-        // Chuyen trang
-        RequestDispatcher rd = request.getRequestDispatcher(url);
+       response.setCharacterEncoding("UTF-8");
+       request.setCharacterEncoding("UTF-8");
+       String action= request.getParameter("action");
+       String url="login";
+       if(action.equals("login")){
+           url="LoginController";
+       }
+       else if(action.equals("logout")){
+           url="LogoutController";
+       }
+        RequestDispatcher rd= request.getRequestDispatcher(url);
         rd.forward(request, response);
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

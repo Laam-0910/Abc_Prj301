@@ -33,28 +33,19 @@ public class MainController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        
         String action = request.getParameter("action");
-        String url = "login";
-         
-        if(action.equals("login")){
-            url = "LoginController";
-        }else if(action.equals("logout")){
-            url = "LogoutController";
-        }else if(action.equals("search")){
-            url = "SearchController";
-        }else if(action.equals("deleteUniversity")){
-            url= "DeleteUniversityController";
+        String url = "login.jsp"; // Trang mặc định
+
+        if (action == null) {
+            url = "login.jsp";
+        } else if (action.equals("login") || action.equals("logout")) {
+            url = "UserController";
+        } else if (action.contains("University")) {
+            // Tất cả action có chữ "University" như: addUniversity, deleteUniversity...
+            url = "UniversityController";
         }
-        else if(action.equals("addUniversity")){
-            url= "AddUniversityController";
-        }
-        
-        // Chuyen trang
-        RequestDispatcher rd = request.getRequestDispatcher(url);
-        rd.forward(request, response);
-        
+
+        request.getRequestDispatcher(url).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
@@ -19,7 +20,7 @@ import model.UserDTO;
  *
  * @author tungi
  */
-public class MainController extends HttpServlet {
+public class UserController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,31 +31,61 @@ public class MainController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void doLogin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        
-        String action = request.getParameter("action");
-        String url = "login";
-         
-        if(action.equals("login")){
-            url = "LoginController";
-        }else if(action.equals("logout")){
-            url = "LogoutController";
-        }else if(action.equals("search")){
-            url = "SearchController";
-        }else if(action.equals("deleteUniversity")){
-            url= "DeleteUniversityController";
+        String url = "";
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") == null) {
+            String txtUsername = request.getParameter("txtUsername");
+            String txtPassword = request.getParameter("txtPassword");
+
+            UserDAO udao = new UserDAO();
+            UserDTO user = udao.login(txtUsername, txtPassword);
+            System.out.println(user);
+            if (user != null) {
+                if (user.isStatus()) {
+                    url = "welcome.jsp";
+                    session.setAttribute("user", user);
+                } else {
+                    url = "e403.jsp";
+                }
+            } else {
+                url = "login.jsp";
+                request.setAttribute("message", "Invalid username or password!");
+            }
+
+        } else {
+            url = "welcome.jsp";
         }
-        else if(action.equals("addUniversity")){
-            url= "AddUniversityController";
-        }
-        
         // Chuyen trang
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
-        
+    }
+
+    protected void doLogout(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
+        if (session.getAttribute("user") != null) {
+            // huy bo toan bo noi dung session
+            session.invalidate();
+        }
+        String url = "login.jsp";
+        response.sendRedirect(url);
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if(action.equals("login")){
+            doLogin(request, response);
+        }else if (action.equals("logout")){
+            doLogout(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

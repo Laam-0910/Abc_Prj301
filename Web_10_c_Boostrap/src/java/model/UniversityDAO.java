@@ -138,4 +138,45 @@ public class UniversityDAO {
         }
         return result > 0;
     }
+
+    public boolean update(UniversityDTO u) {
+        int result = 0;
+        try {
+            Connection conn = DbUtils.getConnection();
+             String sql = "UPDATE tblUniversity"
+                    + "   SET name = ?"
+                    + "      ,shortName = ?"
+                    + "      ,description = ?"
+                    + "      ,foundedYear = ?"
+                    + "      ,address = ?"
+                    + "      ,city = ?"
+                    + "      ,region = ?"
+                    + "      ,type = ?"
+                    + "      ,totalStudents = ?"
+                    + "      ,totalFaculties = ?"
+                    + "      ,isDraft = ?"
+                    + "      ,status = ?"
+                    + " WHERE id = ?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, u.getName());
+            ps.setString(2, u.getShortName());
+            ps.setString(3, u.getDescription());
+            ps.setInt(4, u.getFoundedYear());
+            ps.setString(5, u.getAddress());
+            ps.setString(6, u.getCity());
+            ps.setString(7, u.getRegion());
+            ps.setString(8, u.getType());
+            ps.setInt(9,u.getTotalStudents());
+            ps.setInt(10, u.getTotalFaculties());
+            ps.setBoolean(11, u.isIsDraft());
+            ps.setBoolean(12, true);
+            ps.setString(13, u.getId());
+            result = ps.executeUpdate();
+
+            result = ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return result > 0;
+    }
 }
