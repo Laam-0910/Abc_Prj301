@@ -10,11 +10,10 @@ import javax.persistence.Table;
 
 /**
  *
- * @author caonh
+ * @author HOME
  */
 @Entity
 @Table(name="tblUsers")
-
 public class UserDTO {
     @Id
     private String userID;
@@ -73,6 +72,5 @@ public class UserDTO {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
     
 }

@@ -1,9 +1,10 @@
 <%-- 
-    Document   : E403
-    Created on : Jan 19, 2026, 11:03:14 AM
-    Author     : caonh
+    Document   : e403
+    Created on : Jan 19, 2026, 10:44:38 AM
+    Author     : HOME
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>403 - Access Denied!</h1>
+        <c:if test="${not empty sessionScope.message}">
+            <h1><span style="color: red">${sessionScope.message}</span></h1>
+            <c:remove scope="session" var="message"/>
+        </c:if>
+            <a href="MainController?action=logout&">Logout</a>
     </body>
 </html>

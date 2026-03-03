@@ -7,34 +7,38 @@ package model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import utils.DbUtils;
+import javax.persistence.EntityManager;
 import utils.JPAUtils;
-
 /**
  *
- * @author tungi
+ * @author HOME
  */
 public class UserDAO {
-
-
-    public UserDAO() {
+    
+    public UserDAO(){
     }
-
-    public UserDTO searchById(String username) {
-        EntityManager em= JPAUtils.getEntityManager();
-        return em.find(UserDTO.class, username);
+    
+    public UserDTO searchById(String username){
+        EntityManager em = JPAUtils.getEntityManager();
+        try{
+            return em.find(UserDTO.class,username);
+        }
+        catch (Exception E){
+            return null;
+        }finally{
+            if(em!=null && em.isOpen()){
+                em.close();
+            }
+        }
     }
-
-    public UserDTO login(String username, String password) {
+    
+    public UserDTO login(String username,String password){
         UserDTO u = searchById(username);
-        if (u != null && u.getPassword().equals(password)) {
+        if(u!=null && u.getPassword().equals(password)){
             return u;
         }
         return null;
     }
-
 }

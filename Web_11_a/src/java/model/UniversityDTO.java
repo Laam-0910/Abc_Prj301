@@ -4,34 +4,25 @@
  */
 package model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
  *
- * @author caonh
+ * @author HOME
  */
 @Entity
-@Table(name="tblUniversity")
+@Table(name = "tblUniversity")
 public class UniversityDTO {
-@Id
-//@Column(name="id")
+    @Id
     private String id;
-    private String name;
-    private String shortName;
-    private String description;
+    private String name,shortName,description;
     private int foundedYear;
-    private String address;
-    private String city;
-    private String region;
-    private String type;
-    private int totalStudents;
-    private int totalFaculties;
+    private String address,city,region,type;
+    private int totalStudents,totalFaculties;
     private boolean isDraft;
     private boolean status;
-
     public UniversityDTO() {
     }
 
@@ -153,5 +144,6 @@ public class UniversityDTO {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
+    
+    
 }

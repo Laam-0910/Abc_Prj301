@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
-    Created on : Jan 19, 2026, 9:36:53 AM
-    Author     : caonh
+    Created on : Jan 19, 2026, 9:33:50 AM
+    Author     : HOME
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,7 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Web_06_a</h1>
         <a href="login.jsp">Login</a>
     </body>
 </html>

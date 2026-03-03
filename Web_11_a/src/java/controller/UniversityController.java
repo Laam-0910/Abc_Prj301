@@ -1,4 +1,3 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
@@ -18,7 +17,7 @@ import model.UniversityDTO;
 
 /**
  *
- * @author tungi
+ * @author HOME
  */
 public class UniversityController extends HttpServlet {
 
@@ -240,7 +239,7 @@ public class UniversityController extends HttpServlet {
         } catch (Exception e) {
             log("Error at UniversityController: " + e.toString());
             request.setAttribute("error", "Hệ thống đang gặp sự cố, vui lòng thử lại sau.");
-           
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 
